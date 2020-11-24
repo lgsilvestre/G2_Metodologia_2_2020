@@ -3,17 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/sebas/OneDrive/Documentos/NetBeansProjects/Proyecto_Metodologia_Reconocimento_Facial/src/proyecto_metodologia_reconocimento_facial/Almacenamiento.java</file>
-            <file>file:/C:/Users/sebas/OneDrive/Documentos/NetBeansProjects/Proyecto_Metodologia_Reconocimento_Facial/src/proyecto_metodologia_reconocimento_facial/AlgoritmoR.java</file>
-            <file>file:/C:/Users/sebas/OneDrive/Documentos/NetBeansProjects/Proyecto_Metodologia_Reconocimento_Facial/src/proyecto_metodologia_reconocimento_facial/Imagen.java</file>
-            <file>file:/C:/Users/sebas/OneDrive/Documentos/NetBeansProjects/Proyecto_Metodologia_Reconocimento_Facial/src/proyecto_metodologia_reconocimento_facial/Interfaz.fxml</file>
-            <file>file:/C:/Users/sebas/OneDrive/Documentos/NetBeansProjects/Proyecto_Metodologia_Reconocimento_Facial/src/proyecto_metodologia_reconocimento_facial/Camara.java</file>
-            <file>file:/C:/Users/sebas/OneDrive/Documentos/NetBeansProjects/Proyecto_Metodologia_Reconocimento_Facial/src/proyecto_metodologia_reconocimento_facial/Interfaz.java</file>
-            <file>file:/C:/Users/sebas/OneDrive/Documentos/NetBeansProjects/Proyecto_Metodologia_Reconocimento_Facial/src/proyecto_metodologia_reconocimento_facial/Persona.java</file>
-            <file>file:/C:/Users/sebas/OneDrive/Documentos/NetBeansProjects/Proyecto_Metodologia_Reconocimento_Facial/src/proyecto_metodologia_reconocimento_facial/Administrador.java</file>
-            <file>file:/C:/Users/sebas/OneDrive/Documentos/NetBeansProjects/Proyecto_Metodologia_Reconocimento_Facial/src/proyecto_metodologia_reconocimento_facial/Usuario.java</file>
-            <file>file:/C:/Users/sebas/OneDrive/Documentos/NetBeansProjects/Proyecto_Metodologia_Reconocimento_Facial/src/proyecto_metodologia_reconocimento_facial/Sistema.java</file>
-            <file>file:/C:/Users/sebas/OneDrive/Documentos/NetBeansProjects/Proyecto_Metodologia_Reconocimento_Facial/src/proyecto_metodologia_reconocimento_facial/Supervisor.java</file>
+            <file>file:/C:/Users/sebas/OneDrive/Documentos/G2_Metodologia_2_2020/Proyecto_Metodologia_Reconocimento_Facial/src/proyecto_metodologia_reconocimento_facial/Imagen.java</file>
+            <file>file:/C:/Users/sebas/OneDrive/Documentos/G2_Metodologia_2_2020/Proyecto_Metodologia_Reconocimento_Facial/src/proyecto_metodologia_reconocimento_facial/ControladoresDeInterfaz.java</file>
+            <file>file:/C:/Users/sebas/OneDrive/Documentos/G2_Metodologia_2_2020/Proyecto_Metodologia_Reconocimento_Facial/src/proyecto_metodologia_reconocimento_facial/Sistema.java</file>
+            <file>file:/C:/Users/sebas/OneDrive/Documentos/G2_Metodologia_2_2020/Proyecto_Metodologia_Reconocimento_Facial/src/proyecto_metodologia_reconocimento_facial/OpenCV.java</file>
+            <file>file:/C:/Users/sebas/OneDrive/Documentos/G2_Metodologia_2_2020/Proyecto_Metodologia_Reconocimento_Facial/src/proyecto_metodologia_reconocimento_facial/Interfaz.fxml</file>
         </group>
     </open-files>
 </project-private>
