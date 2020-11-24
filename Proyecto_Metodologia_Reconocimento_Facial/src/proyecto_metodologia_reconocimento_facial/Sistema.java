@@ -13,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 
 public class Sistema extends Application{
 	
+    ControladoresDeInterfaz controles = new ControladoresDeInterfaz();
     @Override
     public void start(Stage primaryStage) {
         try {
@@ -24,7 +25,7 @@ public class Sistema extends Application{
             Scene scene = new Scene(rootElement);
 
             // crear el escenario con el título dado y el creado previamente
-            primaryStage.setTitle("");
+            primaryStage.setTitle("Reconocimiento Facial | Umbrella S.A");
             primaryStage.setScene(scene);
             // mostrar la GUI
             primaryStage.show();
@@ -42,6 +43,7 @@ public class Sistema extends Application{
     public static void main(String[] args) {
         // cargado de la biblioteca nativa openCV
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+        
         launch(args);
     }
 }

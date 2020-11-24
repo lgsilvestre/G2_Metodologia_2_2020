@@ -72,27 +72,22 @@ public class OpenCV {
         try {
             return SwingFXUtils.toFXImage(matToBufferedImage(frame), null);
         } catch (Exception e) {
-            //impresion de error
+            // impresion de error
             System.err.println("No se puede convertir el objeto Mat: " + e);
             return null;
         }
     }
 
-    /**
-     * Generic method for putting element running on a non-JavaFX thread on the
-     * JavaFX thread, to properly update the UI
-     *
-     * @param property a {@link ObjectProperty}
-     * @param value the value to set for the given {@link ObjectProperty}
-     */
+    // metodo generico para que un elemento que no es para javafx se utilice. 
     public static <T> void onFXThread(final ObjectProperty<T> property, final T value) {
         Platform.runLater(() -> {
             property.set(value);
         });
     }
 
+    // carga la imagen de la webcam frame a pixeles 
     private static BufferedImage matToBufferedImage(Mat original) {
-        // init
+        
         BufferedImage image = null;
         int width = original.width(), height = original.height(), channels = original.channels();
         byte[] sourcePixels = new byte[width * height * channels];
