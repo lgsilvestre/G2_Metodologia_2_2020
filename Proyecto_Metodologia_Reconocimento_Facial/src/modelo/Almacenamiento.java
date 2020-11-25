@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package proyecto_metodologia_reconocimento_facial;
+package modelo;
 
 /**
  *
  * @author sebas
  */
-public class Imagen {
+public class Almacenamiento {
     
 }

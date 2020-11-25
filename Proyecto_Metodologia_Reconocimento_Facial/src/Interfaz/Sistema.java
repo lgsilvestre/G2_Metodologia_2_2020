@@ -1,4 +1,4 @@
-package proyecto_metodologia_reconocimento_facial;
+package Interfaz;
 
 import org.opencv.core.Core;
 
@@ -9,6 +9,7 @@ import javafx.stage.WindowEvent;
 import javafx.scene.Scene;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
+
 
 
 public class Sistema extends Application{

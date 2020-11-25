@@ -1,5 +1,5 @@
 
-package proyecto_metodologia_reconocimento_facial;
+package Interfaz;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
@@ -13,6 +13,8 @@ import javafx.scene.image.ImageView;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.videoio.VideoCapture;
+
+
 
 /**
  *
