@@ -82,6 +82,14 @@ public class ControladoresDeInterfaz implements Initializable {
     private Button botonAtrasGR;
     @FXML
     private Button botonAtrasBS;
+    @FXML
+    private ImageView imgGurardarGR;
+    @FXML
+    private Button botonConfirmarBS;
+    @FXML
+    private ImageView imgActualGR;
+    @FXML
+    private ImageView imgActualBR;
  
 
     /**
@@ -110,6 +118,7 @@ public class ControladoresDeInterfaz implements Initializable {
         imagenBtnGuardarRostro.setImage(imageBotonEstandar);
         imgBusqsimilitudes.setImage(imageBotonEstandar); 
         imgConfirmar.setImage(imageBotonEstandar);
+        imgGurardarGR.setImage(imageBotonEstandar);
         
         // pantalla(camara) adaptable
         imagenCamara.fitWidthProperty().bind(paneAdaptable.widthProperty());
@@ -145,8 +154,11 @@ public class ControladoresDeInterfaz implements Initializable {
                                 BufferedImage bufferedImage = SwingFXUtils.fromFXImage(foto, null);
                                 //Archivos de salida
                                 File outputfile2 = new File("imagenes/imagenMuestra.png");
-
-                                ImageIO.write(bufferedImage, "png", outputfile2);//Se crea el archivo que ve el usuario
+                                //Se crea el archivo que ve el usuario
+                                ImageIO.write(bufferedImage, "png", outputfile2);
+                                
+                                imgActualBR.setImage(foto);
+                                imgActualGR.setImage(foto);
                                 
                                 System.out.println("foto tomada");
                             } catch (IOException ex) {
@@ -158,7 +170,7 @@ public class ControladoresDeInterfaz implements Initializable {
                 };
                 timer = Executors.newSingleThreadScheduledExecutor();
                 timer.scheduleAtFixedRate(frameGrabber, 0, 33, TimeUnit.MILLISECONDS);
-                botonOnOff.setText("detener Camera");
+                botonOnOff.setText("ON");
             } else {
                 System.err.println("Imposible encender la conexión de la cámara");
             }
@@ -166,7 +178,8 @@ public class ControladoresDeInterfaz implements Initializable {
             // la cámara no está activa en este momento
             BanderaCamara = false;
             // actualizar de nuevo el contenido del botón
-            botonOnOff.setText("iniciar Camera");
+            botonOnOff.setText("OFF");
+            
             // detener el temporizador
             opencv.detenerImagen(timer, captura);
         }

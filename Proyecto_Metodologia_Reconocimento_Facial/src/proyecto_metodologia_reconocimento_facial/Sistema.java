@@ -43,7 +43,7 @@ public class Sistema extends Application{
     public static void main(String[] args) {
         // cargado de la biblioteca nativa openCV
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-        
+        //System.load("opencv_java450.dll");
         launch(args);
     }
 }
