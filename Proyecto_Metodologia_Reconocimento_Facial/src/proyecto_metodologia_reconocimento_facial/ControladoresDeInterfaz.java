@@ -72,6 +72,16 @@ public class ControladoresDeInterfaz implements Initializable {
     private Pane paneGuardarRostro;
     @FXML
     private ImageView fondoGuardarRostro;
+    @FXML
+    private Pane paneBuscarSimilitud;
+    @FXML
+    private ImageView fondoBuscarSimilitud;
+    @FXML
+    private ImageView imgConfirmar;
+    @FXML
+    private Button botonAtrasGR;
+    @FXML
+    private Button botonAtrasBS;
  
 
     /**
@@ -82,18 +92,24 @@ public class ControladoresDeInterfaz implements Initializable {
         // carga de fondos pantalla principal
         Image imageFondo = new Image(new File("recursos/background.png").toURI().toString()); 
         fondo.setImage(imageFondo);
-        fondo.fitWidthProperty().bind(paneGuardarRostro.widthProperty());
-        fondo.fitHeightProperty().bind(paneGuardarRostro.heightProperty());
+        fondo.fitWidthProperty().bind(panelFondo.widthProperty());
+        fondo.fitHeightProperty().bind(panelFondo.heightProperty());
         
         // carga de fondo pantalla Guardar rostro
         fondoGuardarRostro.setImage(imageFondo);
-        fondoGuardarRostro.fitWidthProperty().bind(panelFondo.widthProperty());
-        fondoGuardarRostro.fitHeightProperty().bind(panelFondo.heightProperty());
+        fondoGuardarRostro.fitWidthProperty().bind(paneGuardarRostro.widthProperty());
+        fondoGuardarRostro.fitHeightProperty().bind(paneGuardarRostro.heightProperty());
+        
+        // carga de fondo pantalla buscar similitud 
+        fondoBuscarSimilitud.setImage(imageFondo);
+        fondoBuscarSimilitud.fitWidthProperty().bind(paneBuscarSimilitud.widthProperty());
+        fondoBuscarSimilitud.fitHeightProperty().bind(paneBuscarSimilitud.heightProperty());
         
         // carga de imagen botones estandar
         Image imageBotonEstandar = new Image(new File("recursos/boton_estandar.png").toURI().toString()); 
         imagenBtnGuardarRostro.setImage(imageBotonEstandar);
         imgBusqsimilitudes.setImage(imageBotonEstandar); 
+        imgConfirmar.setImage(imageBotonEstandar);
         
         // pantalla(camara) adaptable
         imagenCamara.fitWidthProperty().bind(paneAdaptable.widthProperty());
@@ -102,31 +118,6 @@ public class ControladoresDeInterfaz implements Initializable {
         // carga de la foto de captura de imegen
         Image imageBotonCaptura = new Image(new File("recursos/boton_foto.png").toURI().toString()); 
         imgCapturaImagen.setImage(imageBotonCaptura);
-        
-        
-        /*
-        URL linkBotonAyuda = getClass().getResource("imagenes/boton_ayuda.png");
-        URL linkBotonEncender = getClass().getResource("imagenes/boton_encender.png");
-        URL linkBotonEstandar = getClass().getResource("imagenes/boton_estandar.png");
-        URL linkBotonFecha = getClass().getResource("imagenes/boton_fecha.png");
-        URL linkBotonFoto = getClass().getResource("imagenes/boton_foto.png");
-        URL linkBotonVolver = getClass().getResource("imagenes/boton_volver.png");
-        URL linkHeaderApp = getClass().getResource("imagenes/header_app.png");
-        URL linkSelection = getClass().getResource("imagenes/selection.png");
-        URL linkTextBox = getClass().getResource("imagenes/text_box.png"); 
-        
-        Image imagenBotonAyuda = new Image(linkBotonAyuda.toString()); 
-        Image imagenBotonEncender = new Image(linkBotonEncender.toString(),84,25,false,true); 
-        Image imagenBotonEstandar = new Image(linkBotonAyuda.toString()); 
-        Image imagenBotonFecha = new Image(linkBotonAyuda.toString()); 
-        Image imagenBotonFoto = new Image(linkBotonAyuda.toString()); 
-        Image imagenBotonVolver = new Image(linkBotonAyuda.toString()); 
-        Image imagenHeaderApp = new Image(linkBotonAyuda.toString()); 
-        Image imagenSelection = new Image(linkBotonAyuda.toString()); 
-        Image imagenTextBox = new Image(linkBotonAyuda.toString()); 
-        
-        botonOnOff.setGraphic(new ImageView(imagenBotonEncender));
-        */
     }    
 
     @FXML
@@ -183,7 +174,26 @@ public class ControladoresDeInterfaz implements Initializable {
 
     @FXML
     private void ventanaGuardarRostro(ActionEvent event) {
+        paneBuscarSimilitud.setVisible(false);
         paneGuardarRostro.setVisible(true);
+    }
+
+    @FXML
+    private void ventanaBuscarSimilitudes(ActionEvent event) {
+        paneGuardarRostro.setVisible(false);
+        paneBuscarSimilitud.setVisible(true);
+    }
+
+    @FXML
+    private void ventanaPrimaria1(ActionEvent event) {
+        paneGuardarRostro.setVisible(false);
+        paneBuscarSimilitud.setVisible(false);
+    }
+
+    @FXML
+    private void ventanaprimaria(ActionEvent event) {
+        paneGuardarRostro.setVisible(false);
+        paneBuscarSimilitud.setVisible(false);
     }
     
 }
