@@ -58,6 +58,20 @@ public class ControladoresDeInterfaz implements Initializable {
     private Button botonCapturar;
     
     private Image foto =null;
+    @FXML
+    private Button GuardarRostro;
+    @FXML
+    private Button BuscarSimilitudes;
+    @FXML
+    private ImageView imagenBtnGuardarRostro;
+    @FXML
+    private ImageView imgBusqsimilitudes;
+    @FXML
+    private ImageView imgCapturaImagen;
+    @FXML
+    private Pane paneGuardarRostro;
+    @FXML
+    private ImageView fondoGuardarRostro;
  
 
     /**
@@ -65,14 +79,31 @@ public class ControladoresDeInterfaz implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Image image = new Image(new File("recursos/background.png").toURI().toString()); 
-        fondo.setImage(image);
-        fondo.fitWidthProperty().bind(panelFondo.widthProperty());
-        fondo.fitHeightProperty().bind(panelFondo.heightProperty());
+        // carga de fondos pantalla principal
+        Image imageFondo = new Image(new File("recursos/background.png").toURI().toString()); 
+        fondo.setImage(imageFondo);
+        fondo.fitWidthProperty().bind(paneGuardarRostro.widthProperty());
+        fondo.fitHeightProperty().bind(paneGuardarRostro.heightProperty());
         
-        // pantalla adaptable
+        // carga de fondo pantalla Guardar rostro
+        fondoGuardarRostro.setImage(imageFondo);
+        fondoGuardarRostro.fitWidthProperty().bind(panelFondo.widthProperty());
+        fondoGuardarRostro.fitHeightProperty().bind(panelFondo.heightProperty());
+        
+        // carga de imagen botones estandar
+        Image imageBotonEstandar = new Image(new File("recursos/boton_estandar.png").toURI().toString()); 
+        imagenBtnGuardarRostro.setImage(imageBotonEstandar);
+        imgBusqsimilitudes.setImage(imageBotonEstandar); 
+        
+        // pantalla(camara) adaptable
         imagenCamara.fitWidthProperty().bind(paneAdaptable.widthProperty());
         imagenCamara.fitHeightProperty().bind(paneAdaptable.heightProperty());
+        
+        // carga de la foto de captura de imegen
+        Image imageBotonCaptura = new Image(new File("recursos/boton_foto.png").toURI().toString()); 
+        imgCapturaImagen.setImage(imageBotonCaptura);
+        
+        
         /*
         URL linkBotonAyuda = getClass().getResource("imagenes/boton_ayuda.png");
         URL linkBotonEncender = getClass().getResource("imagenes/boton_encender.png");
@@ -148,6 +179,11 @@ public class ControladoresDeInterfaz implements Initializable {
             // detener el temporizador
             opencv.detenerImagen(timer, captura);
         }
+    }
+
+    @FXML
+    private void ventanaGuardarRostro(ActionEvent event) {
+        paneGuardarRostro.setVisible(true);
     }
     
 }
