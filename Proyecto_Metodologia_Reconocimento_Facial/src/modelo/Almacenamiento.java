@@ -5,10 +5,16 @@
  */
 package modelo;
 
+import java.util.ArrayList;
+import base_de_datos.Usuario;
+
 /**
  *
  * @author sebas
  */
 public class Almacenamiento {
-    
+  ArrayList<Usuario> list = new ArrayList<Usuario>();
+  
+  
+
 }
