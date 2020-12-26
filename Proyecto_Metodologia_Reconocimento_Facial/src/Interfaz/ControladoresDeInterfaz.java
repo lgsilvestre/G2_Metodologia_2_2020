@@ -219,8 +219,7 @@ public class ControladoresDeInterfaz implements Initializable {
     @FXML
     private void guardarInformacion(ActionEvent event)
     {
-        
-       
+         
     }
     
 }

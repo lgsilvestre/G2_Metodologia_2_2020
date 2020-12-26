@@ -15,6 +15,5 @@ import base_de_datos.Usuario;
 public class Almacenamiento {
   ArrayList<Usuario> list = new ArrayList<Usuario>();
   
-  
 
 }
