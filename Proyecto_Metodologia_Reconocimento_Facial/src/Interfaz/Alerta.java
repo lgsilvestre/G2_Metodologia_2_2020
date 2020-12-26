@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author Hachi
+ * @author Hokers
  */
 public class Alerta {
     
