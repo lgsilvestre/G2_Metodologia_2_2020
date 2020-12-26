@@ -18,6 +18,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -90,6 +91,13 @@ public class ControladoresDeInterfaz implements Initializable {
     private ImageView imgActualGR;
     @FXML
     private ImageView imgActualBR;
+    @FXML
+    private TextField txtBoxNombre;
+    @FXML
+    private TextField txtBoxInfo;
+    @FXML
+    private Button guardarInfo;
+    
  
 
     /**
@@ -207,6 +215,11 @@ public class ControladoresDeInterfaz implements Initializable {
     private void ventanaprimaria(ActionEvent event) {
         paneGuardarRostro.setVisible(false);
         paneBuscarSimilitud.setVisible(false);
+    }
+    @FXML
+    private void guardarInformacion(ActionEvent event)
+    {
+         
     }
     
 }
