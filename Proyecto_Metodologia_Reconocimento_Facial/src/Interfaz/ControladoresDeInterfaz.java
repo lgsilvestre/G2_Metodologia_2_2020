@@ -240,6 +240,7 @@ public class ControladoresDeInterfaz implements Initializable {
         paneBuscarSimilitud.setVisible(false);
     }
 
+    int i=0;
     @FXML
     private void guardadoDePersona(ActionEvent event) {
         try {
@@ -251,12 +252,10 @@ public class ControladoresDeInterfaz implements Initializable {
             try {
                 BufferedImage bufferedImage = SwingFXUtils.fromFXImage(foto2, null);
                 //Archivos de salida
-                File outputfile2 = new File("carpeta_Fotos/imagenMuestra.png");
+                File outputfile2 = new File("carpeta_Fotos/"+nombreDePersona.getText()+i+".png");
+                i++;
                 //Se crea el archivo que ve el usuario
                 ImageIO.write(bufferedImage, "png", outputfile2);
-
-                imgActualBR.setImage(foto2);
-                imgActualGR.setImage(foto2);
 
                 System.out.println("foto tomada");
             } catch (IOException ex) {
