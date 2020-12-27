@@ -5,10 +5,12 @@
  */
 package Interfaz;
 
+import base_de_datos.Usuario;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -239,7 +241,8 @@ public class ControladoresDeInterfaz implements Initializable {
         paneGuardarRostro.setVisible(false);
         paneBuscarSimilitud.setVisible(false);
     }
-
+    public ArrayList<Usuario> datos = new ArrayList(); 
+    
     int i=0;
     @FXML
     private void guardadoDePersona(ActionEvent event) {
@@ -248,8 +251,9 @@ public class ControladoresDeInterfaz implements Initializable {
             
             
             Image foto2= new Image(img.toURI().toString()); 
-                       
-            try {
+            
+           if(!nombreDePersona.getText().isEmpty() && !infoDePersona.getText().isEmpty() && !dd.getText().isEmpty() && !mm.getText().isEmpty() && !year.getText().isEmpty()){
+                try {
                 BufferedImage bufferedImage = SwingFXUtils.fromFXImage(foto2, null);
                 //Archivos de salida
                 File outputfile2 = new File("carpeta_Fotos/"+nombreDePersona.getText()+i+".png");
@@ -258,11 +262,10 @@ public class ControladoresDeInterfaz implements Initializable {
                 ImageIO.write(bufferedImage, "png", outputfile2);
 
                 System.out.println("foto tomada");
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-            
-            
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }    
         } catch (Exception e) {
         }
     }
