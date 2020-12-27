@@ -18,12 +18,18 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.PixelReader;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Pane;
 import javax.imageio.ImageIO;
+import modelo.DetectarRostro;
+import modelo.ReconocimientoRostroPCA;
 import org.opencv.core.Mat;
 import org.opencv.videoio.VideoCapture;
+
 
 /**
  * FXML Controller class
@@ -90,6 +96,18 @@ public class ControladoresDeInterfaz implements Initializable {
     private ImageView imgActualGR;
     @FXML
     private ImageView imgActualBR;
+    @FXML
+    private Button guardadoTotal;
+    @FXML
+    private TextField nombreDePersona;
+    @FXML
+    private TextField infoDePersona;
+    @FXML
+    private TextField dd;
+    @FXML
+    private TextField mm;
+    @FXML
+    private TextField year;
  
 
     /**
@@ -134,7 +152,8 @@ public class ControladoresDeInterfaz implements Initializable {
         if (!BanderaCamara) {
             // iniciar la captura de video
             captura.open(camaraId);
-
+            DetectarRostro dr = new DetectarRostro(); 
+            
             if (captura.isOpened()) {
                 BanderaCamara = true;
 
@@ -145,11 +164,15 @@ public class ControladoresDeInterfaz implements Initializable {
                     public void run() {
                         // procesa eficazmente un solo fotograma
                         Mat frame = opencv.inicioImagen(captura);
-                        
+                        //marca rostro 
+                        frame = dr.detecta(frame);
                         // convertir y mostrar el marco
                         Image imageToShow = opencv.matImagen(frame);
+                        
+                        
                         botonCapturar.setOnAction((event) -> {
                             foto = imageToShow;
+                            
                             try {
                                 BufferedImage bufferedImage = SwingFXUtils.fromFXImage(foto, null);
                                 //Archivos de salida
@@ -157,8 +180,12 @@ public class ControladoresDeInterfaz implements Initializable {
                                 //Se crea el archivo que ve el usuario
                                 ImageIO.write(bufferedImage, "png", outputfile2);
                                 
-                                imgActualBR.setImage(foto);
-                                imgActualGR.setImage(foto);
+                                PixelReader fotoAnterior = foto.getPixelReader();
+                                Image nuevaFoto = new WritableImage(fotoAnterior,DetectarRostro.datos.get(0),DetectarRostro.datos.get(1),DetectarRostro.datos.get(2), DetectarRostro.datos.get(3));
+                                
+                               
+                                imgActualBR.setImage(nuevaFoto);
+                                imgActualGR.setImage(nuevaFoto);
                                 
                                 System.out.println("foto tomada");
                             } catch (IOException ex) {
@@ -187,6 +214,10 @@ public class ControladoresDeInterfaz implements Initializable {
 
     @FXML
     private void ventanaGuardarRostro(ActionEvent event) {
+        ReconocimientoRostroPCA rp = new ReconocimientoRostroPCA(); 
+        
+        //rp.run("imagenes/imagenMuestra.png");
+                
         paneBuscarSimilitud.setVisible(false);
         paneGuardarRostro.setVisible(true);
     }
@@ -207,6 +238,33 @@ public class ControladoresDeInterfaz implements Initializable {
     private void ventanaprimaria(ActionEvent event) {
         paneGuardarRostro.setVisible(false);
         paneBuscarSimilitud.setVisible(false);
+    }
+
+    int i=0;
+    @FXML
+    private void guardadoDePersona(ActionEvent event) {
+        try {
+            File img = new File("imagenes/imagenMuestra.png");
+            
+            
+            Image foto2= new Image(img.toURI().toString()); 
+                       
+            try {
+                BufferedImage bufferedImage = SwingFXUtils.fromFXImage(foto2, null);
+                //Archivos de salida
+                File outputfile2 = new File("carpeta_Fotos/"+nombreDePersona.getText()+i+".png");
+                i++;
+                //Se crea el archivo que ve el usuario
+                ImageIO.write(bufferedImage, "png", outputfile2);
+
+                System.out.println("foto tomada");
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            
+            
+        } catch (Exception e) {
+        }
     }
     
 }
