@@ -239,32 +239,5 @@ public class ControladoresDeInterfaz implements Initializable {
         paneGuardarRostro.setVisible(false);
         paneBuscarSimilitud.setVisible(false);
     }
-
-    int i=0;
-    @FXML
-    private void guardadoDePersona(ActionEvent event) {
-        try {
-            File img = new File("imagenes/imagenMuestra.png");
-            
-            
-            Image foto2= new Image(img.toURI().toString()); 
-                       
-            try {
-                BufferedImage bufferedImage = SwingFXUtils.fromFXImage(foto2, null);
-                //Archivos de salida
-                File outputfile2 = new File("carpeta_Fotos/"+nombreDePersona.getText()+i+".png");
-                i++;
-                //Se crea el archivo que ve el usuario
-                ImageIO.write(bufferedImage, "png", outputfile2);
-
-                System.out.println("foto tomada");
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-            
-            
-        } catch (Exception e) {
-        }
-    }
     
 }
