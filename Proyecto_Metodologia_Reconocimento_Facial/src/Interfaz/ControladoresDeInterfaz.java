@@ -21,12 +21,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.PixelReader;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Pane;
 import javax.imageio.ImageIO;
 import modelo.DetectarRostro;
 import modelo.ReconocimientoRostroPCA;
 import org.opencv.core.Mat;
 import org.opencv.videoio.VideoCapture;
+
 
 /**
  * FXML Controller class
@@ -165,6 +168,8 @@ public class ControladoresDeInterfaz implements Initializable {
                         frame = dr.detecta(frame);
                         // convertir y mostrar el marco
                         Image imageToShow = opencv.matImagen(frame);
+                        
+                        
                         botonCapturar.setOnAction((event) -> {
                             foto = imageToShow;
                             
@@ -175,8 +180,12 @@ public class ControladoresDeInterfaz implements Initializable {
                                 //Se crea el archivo que ve el usuario
                                 ImageIO.write(bufferedImage, "png", outputfile2);
                                 
-                                imgActualBR.setImage(foto);
-                                imgActualGR.setImage(foto);
+                                PixelReader fotoAnterior = foto.getPixelReader();
+                                Image nuevaFoto = new WritableImage(fotoAnterior,DetectarRostro.datos.get(0),DetectarRostro.datos.get(1),DetectarRostro.datos.get(2), DetectarRostro.datos.get(3));
+                                
+                               
+                                imgActualBR.setImage(nuevaFoto);
+                                imgActualGR.setImage(nuevaFoto);
                                 
                                 System.out.println("foto tomada");
                             } catch (IOException ex) {
