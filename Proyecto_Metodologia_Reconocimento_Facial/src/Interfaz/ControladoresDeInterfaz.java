@@ -5,7 +5,7 @@
  */
 package Interfaz;
 
-import base_de_datos.Usuario;
+import base_de_datos.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -15,11 +15,16 @@ import java.util.ResourceBundle;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -110,8 +115,11 @@ public class ControladoresDeInterfaz implements Initializable {
     private TextField mm;
     @FXML
     private TextField year;
+    @FXML
+    private ComboBox<String> comboBoxGR;
  
-
+    Image nuevaFoto;
+    
     /**
      * Initializes the controller class.
      */
@@ -147,6 +155,27 @@ public class ControladoresDeInterfaz implements Initializable {
         // carga de la foto de captura de imegen
         Image imageBotonCaptura = new Image(new File("recursos/boton_foto.png").toURI().toString()); 
         imgCapturaImagen.setImage(imageBotonCaptura);
+        
+        ObservableList<String> items = FXCollections.observableArrayList();
+        items.addAll("PCA");
+        comboBoxGR.setItems(items);
+        
+        comboBoxGR.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() { 
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if(newValue.equals("PCA")){
+                    ReconocimientoRostroPCA reconocimiento = new ReconocimientoRostroPCA();
+                    
+                    Mat imageShow = reconocimiento.run("imagenes/imagenMuestra2.png");
+                    
+                    Image imageToShow = opencv.matImagen(imageShow);
+                    
+                    imgActualGR.setImage(imageToShow);
+                    
+                }
+            }
+       }); 
+        
     }    
 
     @FXML
@@ -183,8 +212,13 @@ public class ControladoresDeInterfaz implements Initializable {
                                 ImageIO.write(bufferedImage, "png", outputfile2);
                                 
                                 PixelReader fotoAnterior = foto.getPixelReader();
-                                Image nuevaFoto = new WritableImage(fotoAnterior,DetectarRostro.datos.get(0),DetectarRostro.datos.get(1),DetectarRostro.datos.get(2), DetectarRostro.datos.get(3));
+                                nuevaFoto = new WritableImage(fotoAnterior,DetectarRostro.datos.get(0),DetectarRostro.datos.get(1),DetectarRostro.datos.get(2), DetectarRostro.datos.get(3));
                                 
+                                BufferedImage bufferedImage2 = SwingFXUtils.fromFXImage(nuevaFoto, null);
+                                //Archivos de salida
+                                File outputfile3 = new File("imagenes/imagenMuestra2.png");
+                                
+                                ImageIO.write(bufferedImage2, "png", outputfile3);
                                
                                 imgActualBR.setImage(nuevaFoto);
                                 imgActualGR.setImage(nuevaFoto);
@@ -244,15 +278,18 @@ public class ControladoresDeInterfaz implements Initializable {
     public ArrayList<Usuario> datos = new ArrayList(); 
     
     int i=0;
+
     @FXML
     private void guardadoDePersona(ActionEvent event) {
         try {
             File img = new File("imagenes/imagenMuestra.png");
             
             
-            Image foto2= new Image(img.toURI().toString()); 
-            
+            Image foto2 = nuevaFoto;
+           
            if(!nombreDePersona.getText().isEmpty() && !infoDePersona.getText().isEmpty() && !dd.getText().isEmpty() && !mm.getText().isEmpty() && !year.getText().isEmpty()){
+                Usuario nuevoUsuario = new Usuario(nombreDePersona.getText(),infoDePersona.getText(),dd.getText()+"/"+mm.getText()+"/"+year.getText()); 
+                datos.add(nuevoUsuario);
                 try {
                 BufferedImage bufferedImage = SwingFXUtils.fromFXImage(foto2, null);
                 //Archivos de salida

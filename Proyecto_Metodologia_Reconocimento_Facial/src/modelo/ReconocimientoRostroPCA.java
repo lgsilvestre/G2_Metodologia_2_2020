@@ -7,6 +7,7 @@ package modelo;
 
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.image.ImageView;
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
@@ -71,7 +72,7 @@ public class ReconocimientoRostroPCA {
         double angle = Math.atan2(eigenvectorsData[1], eigenvectorsData[0]); // orientation in radians
         return angle;
     }
-    public void run(String direccionDeFoto) {
+    public Mat run(String direccionDeFoto) {
         // Load image
          //String filename = direccionDeFoto.length > 0 ? direccionDeFoto[0] : "../data/pca_test1.jpg";
         
@@ -105,9 +106,11 @@ public class ReconocimientoRostroPCA {
             // Find the orientation of each shape
             getOrientation(contours.get(i), src);
         }
-        HighGui.imshow("output", src);
-        HighGui.waitKey();
-        System.exit(0);
+        
+        return src;
+        //HighGui.imshow("output", src);
+        //HighGui.waitKey();
+        //System.exit(0);
     } 
 }
 
