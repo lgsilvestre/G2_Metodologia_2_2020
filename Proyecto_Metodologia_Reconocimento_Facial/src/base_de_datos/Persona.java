@@ -17,4 +17,22 @@ public class Persona {
         this.nombre = nombre;
         this.infoAdicional = infoAdicional;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getInfoAdicional() {
+        return infoAdicional;
+    }
+
+    public void setInfoAdicional(String infoAdicional) {
+        this.infoAdicional = infoAdicional;
+    }
+    
+    
 }
