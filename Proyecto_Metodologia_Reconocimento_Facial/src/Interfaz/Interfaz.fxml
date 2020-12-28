@@ -106,7 +106,7 @@
                   <Font name="Verdana" size="18.0" />
                </font>
             </Label>
-            <Button fx:id="save" layoutX="693.0" layoutY="439.0" mnemonicParsing="false" opacity="0.0" prefHeight="60.0" prefWidth="200.0" text="Button" />
+            <Button fx:id="save" layoutX="693.0" layoutY="439.0" mnemonicParsing="false" onAction="#clickSave" opacity="0.0" prefHeight="60.0" prefWidth="200.0" text="Button" />
             <Button fx:id="botonAtrasGR" layoutX="31.0" layoutY="31.0" mnemonicParsing="false" onAction="#ventanaPrimaria1" style="-fx-background-color: black; -fx-border-color: white;" text="Atras" textFill="WHITE" />
          </children>
       </Pane>
