@@ -119,6 +119,8 @@ public class ControladoresDeInterfaz implements Initializable {
     private ComboBox<String> comboBoxGR;
  
     Image nuevaFoto;
+    @FXML
+    private ComboBox<String> comboBoxBR;
     
     /**
      * Initializes the controller class.
@@ -130,7 +132,7 @@ public class ControladoresDeInterfaz implements Initializable {
         fondo.setImage(imageFondo);
         fondo.fitWidthProperty().bind(panelFondo.widthProperty());
         fondo.fitHeightProperty().bind(panelFondo.heightProperty());
-        
+      
         // carga de fondo pantalla Guardar rostro
         fondoGuardarRostro.setImage(imageFondo);
         fondoGuardarRostro.fitWidthProperty().bind(paneGuardarRostro.widthProperty());
@@ -174,7 +176,27 @@ public class ControladoresDeInterfaz implements Initializable {
                     
                 }
             }
-       }); 
+        });  
+        
+        comboBoxBR.setItems(items);
+        
+        comboBoxBR.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() { 
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if(newValue.equals("PCA")){
+                    ReconocimientoRostroPCA reconocimiento = new ReconocimientoRostroPCA();
+                    
+                    Mat imageShow = reconocimiento.run("imagenes/imagenMuestra2.png");
+                    
+                    Image imageToShow = opencv.matImagen(imageShow);
+                    
+                    imgActualBR.setImage(imageToShow);
+                    
+                }
+            }
+        });  
+        
+       
         
     }    
 
@@ -208,6 +230,7 @@ public class ControladoresDeInterfaz implements Initializable {
                                 BufferedImage bufferedImage = SwingFXUtils.fromFXImage(foto, null);
                                 //Archivos de salida
                                 File outputfile2 = new File("imagenes/imagenMuestra.png");
+                                outputfile2.deleteOnExit();
                                 //Se crea el archivo que ve el usuario
                                 ImageIO.write(bufferedImage, "png", outputfile2);
                                 
@@ -217,7 +240,7 @@ public class ControladoresDeInterfaz implements Initializable {
                                 BufferedImage bufferedImage2 = SwingFXUtils.fromFXImage(nuevaFoto, null);
                                 //Archivos de salida
                                 File outputfile3 = new File("imagenes/imagenMuestra2.png");
-                                
+                                outputfile3.deleteOnExit();
                                 ImageIO.write(bufferedImage2, "png", outputfile3);
                                
                                 imgActualBR.setImage(nuevaFoto);
@@ -278,13 +301,13 @@ public class ControladoresDeInterfaz implements Initializable {
     public ArrayList<Usuario> datos = new ArrayList(); 
     
     int i=0;
-
+    
+    
     @FXML
     private void guardadoDePersona(ActionEvent event) {
         try {
             File img = new File("imagenes/imagenMuestra.png");
-            
-            
+
             Image foto2 = nuevaFoto;
            
            if(!nombreDePersona.getText().isEmpty() && !infoDePersona.getText().isEmpty() && !dd.getText().isEmpty() && !mm.getText().isEmpty() && !year.getText().isEmpty()){
@@ -293,12 +316,17 @@ public class ControladoresDeInterfaz implements Initializable {
                 try {
                 BufferedImage bufferedImage = SwingFXUtils.fromFXImage(foto2, null);
                 //Archivos de salida
-                File outputfile2 = new File("carpeta_Fotos/"+nombreDePersona.getText()+i+".png");
+                String nombreGuardado = nombreDePersona.getText()+i;
+
+                File outputfile2 = new File("carpeta_Fotos/"+nombreGuardado+".png");
+                outputfile2.deleteOnExit();
                 i++;
+                
+                
                 //Se crea el archivo que ve el usuario
                 ImageIO.write(bufferedImage, "png", outputfile2);
 
-                System.out.println("foto tomada");
+                System.out.println("Usuario guradado");
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }

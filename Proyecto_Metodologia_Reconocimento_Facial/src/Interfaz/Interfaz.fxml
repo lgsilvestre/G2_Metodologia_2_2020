@@ -65,7 +65,7 @@
             <Button fx:id="botonCapturar" layoutX="405.0" layoutY="313.0" mnemonicParsing="false" opacity="0.0" prefHeight="39.0" prefWidth="88.0" text="capturar imagen" />
          </children>
       </Pane>
-      <Pane fx:id="paneGuardarRostro" prefHeight="576.0" prefWidth="1024.0">
+      <Pane fx:id="paneGuardarRostro" prefHeight="576.0" prefWidth="1024.0" visible="false">
          <children>
             <ImageView fx:id="fondoGuardarRostro" fitHeight="576.0" fitWidth="1024.0" pickOnBounds="true">
                <image>
@@ -126,7 +126,7 @@
                   <Image url="@../../recursos/boton_estandar.png" />
                </image>
             </ImageView>
-            <ComboBox layoutX="692.0" layoutY="142.0" prefHeight="15.0" prefWidth="235.0" promptText="Seleccionar patrón" style="-fx-background-color: black;" />
+            <ComboBox fx:id="comboBoxBR" layoutX="692.0" layoutY="142.0" prefHeight="15.0" prefWidth="235.0" promptText="Seleccionar patrón" style="-fx-background-color: black;" />
             <Button layoutX="951.0" layoutY="40.0" mnemonicParsing="false" style="-fx-background-color: black; -fx-border-color: white;" text="?" textFill="WHITE">
                <font>
                   <Font size="16.0" />
