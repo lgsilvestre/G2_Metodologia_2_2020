@@ -37,7 +37,6 @@ import modelo.ReconocimientoRostroPCA;
 import org.opencv.core.Mat;
 import org.opencv.videoio.VideoCapture;
 
-
 /**
  * FXML Controller class
  *
@@ -60,7 +59,7 @@ public class ControladoresDeInterfaz implements Initializable {
     // la identificación de la cámara que se utilizará
     private static int camaraId = 0;
 
-    private  static OpenCV opencv = new OpenCV();
+    private static OpenCV opencv = new OpenCV();
     @FXML
     private Pane paneAdaptable;
     @FXML
@@ -69,10 +68,12 @@ public class ControladoresDeInterfaz implements Initializable {
     private ImageView fondo;
     @FXML
     private Button botonCapturar;
-    
-    private Image foto =null;
+
+    private Image foto = null;
     @FXML
     private Button GuardarRostro;
+    @FXML
+    private Button ayuda;
     @FXML
     private Button BuscarSimilitudes;
     @FXML
@@ -117,96 +118,94 @@ public class ControladoresDeInterfaz implements Initializable {
     private TextField year;
     @FXML
     private ComboBox<String> comboBoxGR;
- 
+
     Image nuevaFoto;
     @FXML
     private ComboBox<String> comboBoxBR;
-    
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // carga de fondos pantalla principal
-        Image imageFondo = new Image(new File("recursos/background.png").toURI().toString()); 
+        Image imageFondo = new Image(new File("recursos/background.png").toURI().toString());
         fondo.setImage(imageFondo);
         fondo.fitWidthProperty().bind(panelFondo.widthProperty());
         fondo.fitHeightProperty().bind(panelFondo.heightProperty());
-      
+
         // carga de fondo pantalla Guardar rostro
         fondoGuardarRostro.setImage(imageFondo);
         fondoGuardarRostro.fitWidthProperty().bind(paneGuardarRostro.widthProperty());
         fondoGuardarRostro.fitHeightProperty().bind(paneGuardarRostro.heightProperty());
-        
+
         // carga de fondo pantalla buscar similitud 
         fondoBuscarSimilitud.setImage(imageFondo);
         fondoBuscarSimilitud.fitWidthProperty().bind(paneBuscarSimilitud.widthProperty());
         fondoBuscarSimilitud.fitHeightProperty().bind(paneBuscarSimilitud.heightProperty());
-        
+
         // carga de imagen botones estandar
-        Image imageBotonEstandar = new Image(new File("recursos/boton_estandar.png").toURI().toString()); 
+        Image imageBotonEstandar = new Image(new File("recursos/boton_estandar.png").toURI().toString());
         imagenBtnGuardarRostro.setImage(imageBotonEstandar);
-        imgBusqsimilitudes.setImage(imageBotonEstandar); 
+        imgBusqsimilitudes.setImage(imageBotonEstandar);
         imgConfirmar.setImage(imageBotonEstandar);
         imgGurardarGR.setImage(imageBotonEstandar);
-        
+
         // pantalla(camara) adaptable
         imagenCamara.fitWidthProperty().bind(paneAdaptable.widthProperty());
         imagenCamara.fitHeightProperty().bind(paneAdaptable.heightProperty());
-        
+
         // carga de la foto de captura de imegen
-        Image imageBotonCaptura = new Image(new File("recursos/boton_foto.png").toURI().toString()); 
+        Image imageBotonCaptura = new Image(new File("recursos/boton_foto.png").toURI().toString());
         imgCapturaImagen.setImage(imageBotonCaptura);
-        
+
         ObservableList<String> items = FXCollections.observableArrayList();
         items.addAll("PCA");
         comboBoxGR.setItems(items);
-        
-        comboBoxGR.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() { 
+
+        comboBoxGR.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if(newValue.equals("PCA")){
+                if (newValue.equals("PCA")) {
                     ReconocimientoRostroPCA reconocimiento = new ReconocimientoRostroPCA();
-                    
+
                     Mat imageShow = reconocimiento.run("imagenes/imagenMuestra2.png");
-                    
+
                     Image imageToShow = opencv.matImagen(imageShow);
-                    
+
                     imgActualGR.setImage(imageToShow);
-                    
+
                 }
             }
-        });  
-        
+        });
+
         comboBoxBR.setItems(items);
-        
-        comboBoxBR.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() { 
+
+        comboBoxBR.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if(newValue.equals("PCA")){
+                if (newValue.equals("PCA")) {
                     ReconocimientoRostroPCA reconocimiento = new ReconocimientoRostroPCA();
-                    
+
                     Mat imageShow = reconocimiento.run("imagenes/imagenMuestra2.png");
-                    
+
                     Image imageToShow = opencv.matImagen(imageShow);
-                    
+
                     imgActualBR.setImage(imageToShow);
-                    
+
                 }
             }
-        });  
-        
-       
-        
-    }    
+        });
+
+    }
 
     @FXML
     private void encenderCamara(ActionEvent event) {
         if (!BanderaCamara) {
             // iniciar la captura de video
             captura.open(camaraId);
-            DetectarRostro dr = new DetectarRostro(); 
-            
+            DetectarRostro dr = new DetectarRostro();
+
             if (captura.isOpened()) {
                 BanderaCamara = true;
 
@@ -221,11 +220,10 @@ public class ControladoresDeInterfaz implements Initializable {
                         frame = dr.detecta(frame);
                         // convertir y mostrar el marco
                         Image imageToShow = opencv.matImagen(frame);
-                        
-                        
+
                         botonCapturar.setOnAction((event) -> {
                             foto = imageToShow;
-                            
+
                             try {
                                 BufferedImage bufferedImage = SwingFXUtils.fromFXImage(foto, null);
                                 //Archivos de salida
@@ -233,19 +231,19 @@ public class ControladoresDeInterfaz implements Initializable {
                                 outputfile2.deleteOnExit();
                                 //Se crea el archivo que ve el usuario
                                 ImageIO.write(bufferedImage, "png", outputfile2);
-                                
+
                                 PixelReader fotoAnterior = foto.getPixelReader();
-                                nuevaFoto = new WritableImage(fotoAnterior,DetectarRostro.datos.get(0),DetectarRostro.datos.get(1),DetectarRostro.datos.get(2), DetectarRostro.datos.get(3));
-                                
+                                nuevaFoto = new WritableImage(fotoAnterior, DetectarRostro.datos.get(0), DetectarRostro.datos.get(1), DetectarRostro.datos.get(2), DetectarRostro.datos.get(3));
+
                                 BufferedImage bufferedImage2 = SwingFXUtils.fromFXImage(nuevaFoto, null);
                                 //Archivos de salida
                                 File outputfile3 = new File("imagenes/imagenMuestra2.png");
                                 outputfile3.deleteOnExit();
                                 ImageIO.write(bufferedImage2, "png", outputfile3);
-                               
+
                                 imgActualBR.setImage(nuevaFoto);
                                 imgActualGR.setImage(nuevaFoto);
-                                
+
                                 System.out.println("foto tomada");
                             } catch (IOException ex) {
                                 ex.printStackTrace();
@@ -265,7 +263,7 @@ public class ControladoresDeInterfaz implements Initializable {
             BanderaCamara = false;
             // actualizar de nuevo el contenido del botón
             botonOnOff.setText("OFF");
-            
+
             // detener el temporizador
             opencv.detenerImagen(timer, captura);
         }
@@ -273,10 +271,9 @@ public class ControladoresDeInterfaz implements Initializable {
 
     @FXML
     private void ventanaGuardarRostro(ActionEvent event) {
-        ReconocimientoRostroPCA rp = new ReconocimientoRostroPCA(); 
-        
+        ReconocimientoRostroPCA rp = new ReconocimientoRostroPCA();
+
         //rp.run("imagenes/imagenMuestra.png");
-                
         paneBuscarSimilitud.setVisible(false);
         paneGuardarRostro.setVisible(true);
     }
@@ -298,45 +295,43 @@ public class ControladoresDeInterfaz implements Initializable {
         paneGuardarRostro.setVisible(false);
         paneBuscarSimilitud.setVisible(false);
     }
-    public ArrayList<Usuario> datos = new ArrayList(); 
-    
-    int i=0;
-    
-    
+    public ArrayList<Usuario> datos = new ArrayList();
+
+    int i = 0;
+
     @FXML
     private void guardadoDePersona(ActionEvent event) {
         try {
             File img = new File("imagenes/imagenMuestra.png");
 
             Image foto2 = nuevaFoto;
-           
-           if(!nombreDePersona.getText().isEmpty() && !infoDePersona.getText().isEmpty() && !dd.getText().isEmpty() && !mm.getText().isEmpty() && !year.getText().isEmpty()){
-                Usuario nuevoUsuario = new Usuario(nombreDePersona.getText(),infoDePersona.getText(),dd.getText()+"/"+mm.getText()+"/"+year.getText()); 
+
+            if (!nombreDePersona.getText().isEmpty() && !infoDePersona.getText().isEmpty() && !dd.getText().isEmpty() && !mm.getText().isEmpty() && !year.getText().isEmpty()) {
+                Usuario nuevoUsuario = new Usuario(nombreDePersona.getText(), infoDePersona.getText(), dd.getText() + "/" + mm.getText() + "/" + year.getText());
                 datos.add(nuevoUsuario);
                 try {
-                BufferedImage bufferedImage = SwingFXUtils.fromFXImage(foto2, null);
-                //Archivos de salida
-                String nombreGuardado = nombreDePersona.getText()+i;
+                    BufferedImage bufferedImage = SwingFXUtils.fromFXImage(foto2, null);
+                    //Archivos de salida
+                    String nombreGuardado = nombreDePersona.getText() + i;
 
-                File outputfile2 = new File("carpeta_Fotos/"+nombreGuardado+".png");
-                outputfile2.deleteOnExit();
-                i++;
-                
-                
-                //Se crea el archivo que ve el usuario
-                ImageIO.write(bufferedImage, "png", outputfile2);
+                    File outputfile2 = new File("carpeta_Fotos/" + nombreGuardado + ".png");
+                    outputfile2.deleteOnExit();
+                    i++;
 
-                System.out.println("Usuario guardado");
-                
-                paneGuardarRostro.setVisible(false);
-                paneBuscarSimilitud.setVisible(false);
-                
+                    //Se crea el archivo que ve el usuario
+                    ImageIO.write(bufferedImage, "png", outputfile2);
+
+                    System.out.println("Usuario guardado");
+
+                    paneGuardarRostro.setVisible(false);
+                    paneBuscarSimilitud.setVisible(false);
+
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
-            }    
+            }
         } catch (Exception e) {
         }
     }
-    
+
 }
