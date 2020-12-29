@@ -326,7 +326,11 @@ public class ControladoresDeInterfaz implements Initializable {
                 //Se crea el archivo que ve el usuario
                 ImageIO.write(bufferedImage, "png", outputfile2);
 
-                System.out.println("Usuario guradado");
+                System.out.println("Usuario guardado");
+                
+                paneGuardarRostro.setVisible(false);
+                paneBuscarSimilitud.setVisible(false);
+                
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
