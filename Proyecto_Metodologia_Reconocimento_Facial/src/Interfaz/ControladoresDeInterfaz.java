@@ -5,19 +5,26 @@
  */
 package Interfaz;
 
+import base_de_datos.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -108,8 +115,13 @@ public class ControladoresDeInterfaz implements Initializable {
     private TextField mm;
     @FXML
     private TextField year;
+    @FXML
+    private ComboBox<String> comboBoxGR;
  
-
+    Image nuevaFoto;
+    @FXML
+    private ComboBox<String> comboBoxBR;
+    
     /**
      * Initializes the controller class.
      */
@@ -120,7 +132,7 @@ public class ControladoresDeInterfaz implements Initializable {
         fondo.setImage(imageFondo);
         fondo.fitWidthProperty().bind(panelFondo.widthProperty());
         fondo.fitHeightProperty().bind(panelFondo.heightProperty());
-        
+      
         // carga de fondo pantalla Guardar rostro
         fondoGuardarRostro.setImage(imageFondo);
         fondoGuardarRostro.fitWidthProperty().bind(paneGuardarRostro.widthProperty());
@@ -145,6 +157,47 @@ public class ControladoresDeInterfaz implements Initializable {
         // carga de la foto de captura de imegen
         Image imageBotonCaptura = new Image(new File("recursos/boton_foto.png").toURI().toString()); 
         imgCapturaImagen.setImage(imageBotonCaptura);
+        
+        ObservableList<String> items = FXCollections.observableArrayList();
+        items.addAll("PCA");
+        comboBoxGR.setItems(items);
+        
+        comboBoxGR.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() { 
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if(newValue.equals("PCA")){
+                    ReconocimientoRostroPCA reconocimiento = new ReconocimientoRostroPCA();
+                    
+                    Mat imageShow = reconocimiento.run("imagenes/imagenMuestra2.png");
+                    
+                    Image imageToShow = opencv.matImagen(imageShow);
+                    
+                    imgActualGR.setImage(imageToShow);
+                    
+                }
+            }
+        });  
+        
+        comboBoxBR.setItems(items);
+        
+        comboBoxBR.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() { 
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if(newValue.equals("PCA")){
+                    ReconocimientoRostroPCA reconocimiento = new ReconocimientoRostroPCA();
+                    
+                    Mat imageShow = reconocimiento.run("imagenes/imagenMuestra2.png");
+                    
+                    Image imageToShow = opencv.matImagen(imageShow);
+                    
+                    imgActualBR.setImage(imageToShow);
+                    
+                }
+            }
+        });  
+        
+       
+        
     }    
 
     @FXML
@@ -177,12 +230,18 @@ public class ControladoresDeInterfaz implements Initializable {
                                 BufferedImage bufferedImage = SwingFXUtils.fromFXImage(foto, null);
                                 //Archivos de salida
                                 File outputfile2 = new File("imagenes/imagenMuestra.png");
+                                outputfile2.deleteOnExit();
                                 //Se crea el archivo que ve el usuario
                                 ImageIO.write(bufferedImage, "png", outputfile2);
                                 
                                 PixelReader fotoAnterior = foto.getPixelReader();
-                                Image nuevaFoto = new WritableImage(fotoAnterior,DetectarRostro.datos.get(0),DetectarRostro.datos.get(1),DetectarRostro.datos.get(2), DetectarRostro.datos.get(3));
+                                nuevaFoto = new WritableImage(fotoAnterior,DetectarRostro.datos.get(0),DetectarRostro.datos.get(1),DetectarRostro.datos.get(2), DetectarRostro.datos.get(3));
                                 
+                                BufferedImage bufferedImage2 = SwingFXUtils.fromFXImage(nuevaFoto, null);
+                                //Archivos de salida
+                                File outputfile3 = new File("imagenes/imagenMuestra2.png");
+                                outputfile3.deleteOnExit();
+                                ImageIO.write(bufferedImage2, "png", outputfile3);
                                
                                 imgActualBR.setImage(nuevaFoto);
                                 imgActualGR.setImage(nuevaFoto);
@@ -238,6 +297,42 @@ public class ControladoresDeInterfaz implements Initializable {
     private void ventanaprimaria(ActionEvent event) {
         paneGuardarRostro.setVisible(false);
         paneBuscarSimilitud.setVisible(false);
+    }
+    public ArrayList<Usuario> datos = new ArrayList(); 
+    
+    int i=0;
+    
+    
+    @FXML
+    private void guardadoDePersona(ActionEvent event) {
+        try {
+            File img = new File("imagenes/imagenMuestra.png");
+
+            Image foto2 = nuevaFoto;
+           
+           if(!nombreDePersona.getText().isEmpty() && !infoDePersona.getText().isEmpty() && !dd.getText().isEmpty() && !mm.getText().isEmpty() && !year.getText().isEmpty()){
+                Usuario nuevoUsuario = new Usuario(nombreDePersona.getText(),infoDePersona.getText(),dd.getText()+"/"+mm.getText()+"/"+year.getText()); 
+                datos.add(nuevoUsuario);
+                try {
+                BufferedImage bufferedImage = SwingFXUtils.fromFXImage(foto2, null);
+                //Archivos de salida
+                String nombreGuardado = nombreDePersona.getText()+i;
+
+                File outputfile2 = new File("carpeta_Fotos/"+nombreGuardado+".png");
+                outputfile2.deleteOnExit();
+                i++;
+                
+                
+                //Se crea el archivo que ve el usuario
+                ImageIO.write(bufferedImage, "png", outputfile2);
+
+                System.out.println("Usuario guradado");
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }    
+        } catch (Exception e) {
+        }
     }
     
 }

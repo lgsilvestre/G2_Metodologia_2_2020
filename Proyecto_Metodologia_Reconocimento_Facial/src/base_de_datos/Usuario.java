@@ -10,18 +10,14 @@ package base_de_datos;
  * @author Hokers
  */
 public class Usuario {
-    public String nombre;
-    public String info;
-    public String fecha;
-    public int idImg;
-    public int idPatron;
+    String nombre; 
+    String info; 
+    String fecha; 
 
-    public Usuario(String nombre, String info, String fecha, int idImg, int idPatron) {
+    public Usuario(String nombre, String info, String fecha) {
         this.nombre = nombre;
         this.info = info;
         this.fecha = fecha;
-        this.idImg = idImg;
-        this.idPatron = idPatron;
     }
 
     public String getNombre() {
@@ -47,26 +43,4 @@ public class Usuario {
     public void setFecha(String fecha) {
         this.fecha = fecha;
     }
-
-    public int getIdImg() {
-        return idImg;
-    }
-
-    public void setIdImg(int idImg) {
-        this.idImg = idImg;
-    }
-
-    public int getIdPatron() {
-        return idPatron;
-    }
-
-    public void setIdPatron(int idPatron) {
-        this.idPatron = idPatron;
-    }
-    
-    
-    
-    
-    
-    
 }

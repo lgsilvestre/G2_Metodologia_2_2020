@@ -7,6 +7,7 @@ package modelo;
 
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.image.ImageView;
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
@@ -18,7 +19,7 @@ import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc; 
 
 public class ReconocimientoRostroPCA {
-     private void drawAxis(Mat img, Point p_, Point q_, Scalar colour, float scale) {
+    private void drawAxis(Mat img, Point p_, Point q_, Scalar colour, float scale) {
         Point p = new Point(p_.x, p_.y);
         Point q = new Point(q_.x, q_.y);
         double angle = Math.atan2(p.y - q.y, p.x - q.x); // angle in radians
@@ -26,13 +27,22 @@ public class ReconocimientoRostroPCA {
         // Here we lengthen the arrow by a factor of scale
         q.x = (int) (p.x - scale * hypotenuse * Math.cos(angle));
         q.y = (int) (p.y - scale * hypotenuse * Math.sin(angle));
+
+        
+        
         Imgproc.line(img, p, q, colour, 1, Imgproc.LINE_AA, 0);
         // create the arrow hooks
         p.x = (int) (q.x + 9 * Math.cos(angle + Math.PI / 4));
         p.y = (int) (q.y + 9 * Math.sin(angle + Math.PI / 4));
+        
+    
+        
+        
         Imgproc.line(img, p, q, colour, 1, Imgproc.LINE_AA, 0);
         p.x = (int) (q.x + 9 * Math.cos(angle - Math.PI / 4));
         p.y = (int) (q.y + 9 * Math.sin(angle - Math.PI / 4));
+    
+        
         Imgproc.line(img, p, q, colour, 1, Imgproc.LINE_AA, 0);
     }
     private double getOrientation(MatOfPoint ptsMat, Mat img) {
@@ -45,6 +55,7 @@ public class ReconocimientoRostroPCA {
             dataPtsData[i * dataPts.cols()] = pts.get(i).x;
             dataPtsData[i * dataPts.cols() + 1] = pts.get(i).y;
         }
+       
         dataPts.put(0, 0, dataPtsData);
         // Perform PCA analysis
         Mat mean = new Mat();
@@ -71,7 +82,7 @@ public class ReconocimientoRostroPCA {
         double angle = Math.atan2(eigenvectorsData[1], eigenvectorsData[0]); // orientation in radians
         return angle;
     }
-    public void run(String direccionDeFoto) {
+    public Mat run(String direccionDeFoto) {
         // Load image
          //String filename = direccionDeFoto.length > 0 ? direccionDeFoto[0] : "../data/pca_test1.jpg";
         
@@ -97,17 +108,18 @@ public class ReconocimientoRostroPCA {
         for (int i = 0; i < contours.size(); i++) {
             // Calculate the area of each contour
             double area = Imgproc.contourArea(contours.get(i));
+           
             // Ignore contours that are too small or too large
             if (area < 1e2 || 1e5 < area)
                 continue;
             // Draw each contour only for visualisation purposes
             Imgproc.drawContours(src, contours, i, new Scalar(0, 0, 255), 2);
             // Find the orientation of each shape
-            getOrientation(contours.get(i), src);
+            double angle = getOrientation(contours.get(i), src);
+           
         }
-        HighGui.imshow("output", src);
-        HighGui.waitKey();
-        System.exit(0);
+        
+        return src;
     } 
 }
 

@@ -1,5 +1,7 @@
 package Interfaz;
 
+import java.io.File;
+import java.nio.file.Files;
 import org.opencv.core.Core;
 
 import javafx.application.Application;

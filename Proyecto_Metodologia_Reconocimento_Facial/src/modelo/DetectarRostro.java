@@ -41,7 +41,7 @@ public class DetectarRostro {
         Imgproc.cvtColor(mRgba, mGrey, Imgproc.COLOR_BGR2GRAY);
         Imgproc.equalizeHist(mGrey, mGrey);
         clasificador.detectMultiScale(mGrey, rostros);
-        System.out.println(String.format("Detectando %s rostros", rostros.toArray().length));
+        //System.out.println(String.format("Detectando %s rostros", rostros.toArray().length));
         
         for (Rect rect : rostros.toArray()) {
             //Se dibuja un rectángulo donde se ha encontrado el rostro
