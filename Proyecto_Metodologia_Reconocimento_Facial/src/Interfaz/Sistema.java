@@ -1,5 +1,7 @@
 package Interfaz;
 
+import java.io.File;
+import java.nio.file.Files;
 import org.opencv.core.Core;
 
 import javafx.application.Application;
@@ -28,7 +30,7 @@ public class Sistema extends Application{
             // crear el escenario con el título dado y el creado previamente
             primaryStage.setTitle("Reconocimiento Facial | Umbrella S.A");
             primaryStage.setScene(scene);
-            // mostrar la GUI
+            primaryStage.setResizable(false);
             primaryStage.show();
             // cierre 
             primaryStage.setOnCloseRequest((new EventHandler<WindowEvent>() {
