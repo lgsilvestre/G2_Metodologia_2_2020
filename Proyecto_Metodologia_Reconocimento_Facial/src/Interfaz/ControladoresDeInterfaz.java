@@ -300,6 +300,11 @@ public class ControladoresDeInterfaz implements Initializable {
     int i = 0;
 
     @FXML
+    private void ventanaAyuda(ActionEvent event) {
+        Image ventanaAyuda = new Image(new File("recursos/ventana_emergente.png").toURI().toString());
+    }
+
+    @FXML
     private void guardadoDePersona(ActionEvent event) {
         try {
             File img = new File("imagenes/imagenMuestra.png");
