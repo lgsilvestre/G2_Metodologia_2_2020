@@ -32,6 +32,8 @@ import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Pane;
 import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import modelo.DetectarRostro;
 import modelo.ReconocimientoRostroPCA;
 import org.opencv.core.Mat;
@@ -66,6 +68,10 @@ public class ControladoresDeInterfaz implements Initializable {
     private Pane panelFondo;
     @FXML
     private ImageView fondo;
+
+    @FXML
+    private ImageView ventanaAyuda;
+
     @FXML
     private Button botonCapturar;
 
@@ -301,7 +307,8 @@ public class ControladoresDeInterfaz implements Initializable {
 
     @FXML
     private void ventanaAyuda(ActionEvent event) {
-        Image ventanaAyuda = new Image(new File("recursos/ventana_emergente.png").toURI().toString());
+        boolean op = true;
+        ventanaAyuda.setVisible(op);
     }
 
     @FXML

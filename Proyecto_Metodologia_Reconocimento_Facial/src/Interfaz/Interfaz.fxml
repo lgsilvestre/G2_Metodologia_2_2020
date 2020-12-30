@@ -51,6 +51,11 @@
             </Button>
             <Button fx:id="GuardarRostro" layoutX="778.0" layoutY="188.0" mnemonicParsing="false" onAction="#ventanaGuardarRostro" opacity="0.0" prefHeight="54.0" prefWidth="181.0" text="Button" />
             <Button fx:id="BuscarSimilitudes" layoutX="778.0" layoutY="261.0" mnemonicParsing="false" onAction="#ventanaBuscarSimilitudes" opacity="0.0" prefHeight="54.0" prefWidth="181.0" text="buscar similitudes" />
+            <ImageView fx:id="ventanaAyuda" fitHeight="152.0" fitWidth="181.0" layoutX="764.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../../recursos/ventana_emergente.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
       <Pane fx:id="paneAdaptable" layoutX="147.0" layoutY="105.0" prefHeight="366.0" prefWidth="515.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="103.0" AnchorPane.leftAnchor="147.0" AnchorPane.rightAnchor="362.0" AnchorPane.topAnchor="105.0">

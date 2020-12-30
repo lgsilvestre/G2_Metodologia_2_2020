@@ -3,9 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Metodologias/G2_Metodologia_2_2020/Proyecto_Metodologia_Reconocimento_Facial/src/Interfaz/Sistema.java</file>
-            <file>file:/D:/Metodologias/G2_Metodologia_2_2020/Proyecto_Metodologia_Reconocimento_Facial/src/base_de_datos/Usuario.java</file>
-            <file>file:/D:/Metodologias/G2_Metodologia_2_2020/Proyecto_Metodologia_Reconocimento_Facial/src/Interfaz/ControladoresDeInterfaz.java</file>
+            <file>file:/C:/Users/Serllet/Desktop/Proyecto%20Metodología/G2_Metodologia_2_2020/Proyecto_Metodologia_Reconocimento_Facial/src/modelo/Camara.java</file>
+            <file>file:/C:/Users/Serllet/Desktop/Proyecto%20Metodología/G2_Metodologia_2_2020/Proyecto_Metodologia_Reconocimento_Facial/src/modelo/AlgoritmoR.java</file>
+            <file>file:/C:/Users/Serllet/Desktop/Proyecto%20Metodología/G2_Metodologia_2_2020/Proyecto_Metodologia_Reconocimento_Facial/src/modelo/Imagen.java</file>
+            <file>file:/C:/Users/Serllet/Desktop/Proyecto%20Metodología/G2_Metodologia_2_2020/Proyecto_Metodologia_Reconocimento_Facial/src/Interfaz/Sistema.java</file>
+            <file>file:/C:/Users/Serllet/Desktop/Proyecto%20Metodología/G2_Metodologia_2_2020/Proyecto_Metodologia_Reconocimento_Facial/src/Interfaz/Interfaz.fxml</file>
+            <file>file:/C:/Users/Serllet/Desktop/Proyecto%20Metodología/G2_Metodologia_2_2020/Proyecto_Metodologia_Reconocimento_Facial/src/modelo/ReconocimientoRostroPCA.java</file>
+            <file>file:/C:/Users/Serllet/Desktop/Proyecto%20Metodología/G2_Metodologia_2_2020/Proyecto_Metodologia_Reconocimento_Facial/src/Interfaz/Alerta.java</file>
+            <file>file:/C:/Users/Serllet/Desktop/Proyecto%20Metodología/G2_Metodologia_2_2020/Proyecto_Metodologia_Reconocimento_Facial/src/modelo/DetectarRostro.java</file>
+            <file>file:/C:/Users/Serllet/Desktop/Proyecto%20Metodología/G2_Metodologia_2_2020/Proyecto_Metodologia_Reconocimento_Facial/src/Interfaz/ControladoresDeInterfaz.java</file>
+            <file>file:/C:/Users/Serllet/Desktop/Proyecto%20Metodología/G2_Metodologia_2_2020/Proyecto_Metodologia_Reconocimento_Facial/src/Interfaz/OpenCV.java</file>
+            <file>file:/C:/Users/Serllet/Desktop/Proyecto%20Metodología/G2_Metodologia_2_2020/Proyecto_Metodologia_Reconocimento_Facial/src/modelo/Almacenamiento.java</file>
         </group>
     </open-files>
 </project-private>
