@@ -338,5 +338,9 @@ public class ControladoresDeInterfaz implements Initializable {
         } catch (Exception e) {
         }
     }
+    @FXML
+    private void enlistarRostros(String nombre){
+        
+    }
     
 }
