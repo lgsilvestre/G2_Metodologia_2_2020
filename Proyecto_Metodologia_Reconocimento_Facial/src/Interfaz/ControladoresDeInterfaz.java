@@ -285,6 +285,8 @@ public class ControladoresDeInterfaz implements Initializable {
     private void ventanaBuscarSimilitudes(ActionEvent event) {
         paneGuardarRostro.setVisible(false);
         paneBuscarSimilitud.setVisible(true);
+        
+        enlistarRostros("");//Por ahora un nombre vacio para futuras opciones de busqueda
     }
 
     @FXML
@@ -338,9 +340,40 @@ public class ControladoresDeInterfaz implements Initializable {
         } catch (Exception e) {
         }
     }
-    @FXML
+        @FXML
     private void enlistarRostros(String nombre){
-        
+        String sCarpAct = System.getProperty("imagenes");
+        File carpeta = new File(sCarpAct);
+        String[] listado = carpeta.list();
+        imgActualBR.setImage(nuevaFoto);
+        if (listado == null || listado.length == 0) {
+            System.out.println("No hay elementos dentro de la carpeta actual");
+            return;
+        }
+        else {
+            for (int i=0; i< listado.length; i++) {
+                
+                System.out.println(listado[i]);//no llegue a programar la parte de mostrar...
+            }
+        }
+    }
+    @FXML
+    private void buscarRostros(String nombre){//PARA BUSCAR ROSTROS POR EL NOMBRE...
+        String sCarpAct = System.getProperty("imagenes");
+        File carpeta = new File(sCarpAct);
+        String[] listado = carpeta.list();
+        if (listado == null || listado.length == 0) {
+            System.out.println("No hay elementos dentro de la carpeta actual");
+            return;
+        }
+        else {
+            for (int i=0; i< listado.length; i++) {
+                if(listado[i].equals(nombre+".png")){
+                    System.out.println("Encontrado");
+                }
+                System.out.println(listado[i]);
+            }
+        }
     }
     
 }
