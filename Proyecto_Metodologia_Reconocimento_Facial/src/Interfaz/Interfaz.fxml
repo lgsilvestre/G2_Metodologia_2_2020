@@ -88,7 +88,7 @@
                   <Font name="Verdana" size="18.0" />
                </font>
             </Label>
-            <Button layoutX="953.0" layoutY="43.0" mnemonicParsing="false" style="-fx-background-color: black; -fx-border-color: white;" text="?" textFill="WHITE">
+            <Button fx:id="ayuda1" layoutX="953.0" layoutY="43.0" mnemonicParsing="false" onAction="#ventanaAyuda" style="-fx-background-color: black; -fx-border-color: white;" text="?" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
@@ -132,7 +132,7 @@
                </image>
             </ImageView>
             <ComboBox fx:id="comboBoxBR" layoutX="692.0" layoutY="142.0" prefHeight="15.0" prefWidth="235.0" promptText="Seleccionar patrón" style="-fx-background-color: black;" />
-            <Button layoutX="951.0" layoutY="40.0" mnemonicParsing="false" style="-fx-background-color: black; -fx-border-color: white;" text="?" textFill="WHITE">
+            <Button fx:id="ayuda2" layoutX="951.0" layoutY="40.0" mnemonicParsing="false" onAction="#ventanaAyuda" style="-fx-background-color: black; -fx-border-color: white;" text="?" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>

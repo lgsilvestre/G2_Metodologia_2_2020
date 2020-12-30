@@ -81,6 +81,10 @@ public class ControladoresDeInterfaz implements Initializable {
     @FXML
     private Button ayuda;
     @FXML
+    private Button ayuda1;
+    @FXML
+    private Button ayuda2;
+    @FXML
     private Button BuscarSimilitudes;
     @FXML
     private ImageView imagenBtnGuardarRostro;
